@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  host: <%= ENV.fetch("POSTGRES_HOST", "postgres") %>
+  port: <%= ENV.fetch("POSTGRES_PORT", 5432) %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: space_code_platform_development
+
+test:
+  <<: *default
+  database: space_code_platform_test
+
+production:
+  <<: *default
+  database: space_code_platform_production
+  username: space_code_platform
+  password: <%= ENV["SPACE_CODE_PLATFORM_DATABASE_PASSWORD"] %>
