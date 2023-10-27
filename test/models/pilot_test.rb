@@ -40,4 +40,10 @@ class PilotTest < ActiveSupport::TestCase
     assert_not pilot.valid?
     assert_attribute_contains_error pilot, :certification, :wrong_length
   end
+
+  test "certification should be unique" do
+    pilot = Pilot.new(certification: pilots(:hans_solo).certification)
+    assert_not pilot.valid?
+    assert_attribute_contains_error pilot, :certification, :taken
+  end
 end
