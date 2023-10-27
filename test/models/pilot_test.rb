@@ -46,4 +46,17 @@ class PilotTest < ActiveSupport::TestCase
     assert_not pilot.valid?
     assert_attribute_contains_error pilot, :certification, :taken
   end
+
+  test "certification should be valid if check digit (last) is incorrect" do
+    pilot = Pilot.new(name: "Bo Katan", age: 28, certification: "1234567")
+    assert_not pilot.valid?
+    assert_attribute_contains_error pilot, :certification, :invalid
+  end
+
+  test "certification should be valid if check digit (last) is correct" do
+    ["987655-7", "632988-3", "774199-4"].each do |certification|
+      pilot = Pilot.new(name: "Bo Katan", age: 28, certification: certification)
+      assert pilot.valid?
+    end
+  end
 end
