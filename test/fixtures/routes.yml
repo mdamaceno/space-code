@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  origin_planet_id: <%= Planet.find_by(name: 'Coruscant').id %>
-  destination_planet_id: <%= Planet.find_by(name: 'Naboo').id %>
+  origin_planet_id: "d098bb62-7469-11ee-b7be-a8a1599ad2d2"
+  destination_planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2"
   blocked: false
   fuel_cost: 10
