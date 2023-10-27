@@ -59,4 +59,9 @@ class PilotTest < ActiveSupport::TestCase
       assert pilot.valid?
     end
   end
+
+  test "generate_valid_certification should return a valid certification" do
+    certification = Pilot.generate_valid_certification("445566")
+    assert certification.length == 7
+  end
 end
