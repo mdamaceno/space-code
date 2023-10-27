@@ -10,8 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_26_225926) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "planets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_planets_on_name", unique: true
+  end
+
+  create_table "routes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "origin_planet_id", null: false
+    t.uuid "destination_planet_id", null: false
+    t.boolean "blocked", default: false, null: false
+    t.integer "fuel_cost", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_planet_id"], name: "index_routes_on_destination_planet_id"
+    t.index ["origin_planet_id", "destination_planet_id"], name: "index_routes_on_origin_planet_id_and_destination_planet_id", unique: true
+    t.index ["origin_planet_id"], name: "index_routes_on_origin_planet_id"
+  end
+
+  add_foreign_key "routes", "planets", column: "destination_planet_id", on_delete: :cascade
+  add_foreign_key "routes", "planets", column: "origin_planet_id", on_delete: :cascade
 end
