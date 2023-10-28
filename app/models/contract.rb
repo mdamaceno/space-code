@@ -3,6 +3,8 @@ class Contract < ApplicationRecord
   belongs_to :planet, foreign_key: :origin_planet_id
   belongs_to :planet, foreign_key: :destination_planet_id
 
+  has_many :payload, dependent: :destroy, class_name: "Resource"
+
   validates :description, presence: true, length: { maximum: 255 }
   validates :origin_planet_id, presence: true
   validates :destination_planet_id, presence: true

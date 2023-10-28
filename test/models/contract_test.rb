@@ -61,4 +61,9 @@ class ContractTest < ActiveSupport::TestCase
     contract.complete!
     assert_not_nil contract.completed_at
   end
+
+  test "payload should return resources" do
+    contract = contracts(:water_and_food_to_coruscant)
+    assert contract.payload.size.positive?
+  end
 end
