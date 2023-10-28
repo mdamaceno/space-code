@@ -1,6 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-millenium_falcon:
+millennium_falcon:
   name: Millenium Falcon
   fuel_capacity: 50
   fuel_level: 40
