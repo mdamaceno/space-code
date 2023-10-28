@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_28_211934) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_28_222040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_211934) do
     t.index ["name"], name: "index_planets_on_name", unique: true
   end
 
+  create_table "resources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "weight", default: 0, null: false
+    t.uuid "contract_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "routes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "origin_planet_id", null: false
     t.uuid "destination_planet_id", null: false
@@ -66,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_211934) do
   add_foreign_key "contracts", "planets", column: "destination_planet_id", on_delete: :cascade
   add_foreign_key "contracts", "planets", column: "origin_planet_id", on_delete: :cascade
   add_foreign_key "contracts", "ships", on_delete: :nullify
+  add_foreign_key "resources", "contracts", on_delete: :cascade
   add_foreign_key "routes", "planets", column: "destination_planet_id", on_delete: :cascade
   add_foreign_key "routes", "planets", column: "origin_planet_id", on_delete: :cascade
   add_foreign_key "ships", "pilots", on_delete: :cascade
