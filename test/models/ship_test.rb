@@ -60,4 +60,17 @@ class ShipTest < ActiveSupport::TestCase
     ship = Ship.new(@valid_attributes.tap { |a| a[:weight_capacity] = nil })
     assert_attribute_contains_error ship, :weight_capacity, :blank
   end
+
+  test "increase_fuel_level should increase fuel_level" do
+    ship = ships(:millennium_falcon)
+    current_level = ship.fuel_level
+    ship.increase_fuel_level(10)
+    assert_equal current_level + 10, ship.fuel_level
+  end
+
+  test "increase_fuel_level should not increase fuel_level beyond fuel_capacity" do
+    ship = ships(:millennium_falcon)
+    ship.increase_fuel_level(100)
+    assert_equal ship.fuel_capacity, ship.fuel_level
+  end
 end

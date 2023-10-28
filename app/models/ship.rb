@@ -8,4 +8,10 @@ class Ship < ApplicationRecord
     less_than_or_equal_to: -> (ship) { ship.fuel_capacity.to_i },
   }
   validates :weight_capacity, presence: true
+
+  def increase_fuel_level(amount)
+    return self.fuel_level = fuel_capacity if fuel_level + amount > fuel_capacity
+
+    self.fuel_level += amount
+  end
 end
