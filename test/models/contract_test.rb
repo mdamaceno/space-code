@@ -55,4 +55,10 @@ class ContractTest < ActiveSupport::TestCase
     contract = Contract.new(@valid_attributes.tap { |a| a[:value] = -1 })
     assert_attribute_contains_error contract, :value, :greater_than_or_equal_to
   end
+
+  test "complete! sets completed_at" do
+    contract = contracts(:water_and_food_to_coruscant)
+    contract.complete!
+    assert_not_nil contract.completed_at
+  end
 end
