@@ -73,4 +73,17 @@ class ShipTest < ActiveSupport::TestCase
     ship.increase_fuel_level(100)
     assert_equal ship.fuel_capacity, ship.fuel_level
   end
+
+  test "decrease_fuel_level should decrease fuel_level" do
+    ship = ships(:millennium_falcon)
+    current_level = ship.fuel_level
+    ship.decrease_fuel_level(10)
+    assert_equal current_level - 10, ship.fuel_level
+  end
+
+  test "decrease_fuel_level should not decrease fuel_level below 0" do
+    ship = ships(:millennium_falcon)
+    ship.decrease_fuel_level(100)
+    assert_equal 0, ship.fuel_level
+  end
 end

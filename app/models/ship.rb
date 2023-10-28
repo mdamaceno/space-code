@@ -14,4 +14,10 @@ class Ship < ApplicationRecord
 
     self.fuel_level += amount
   end
+
+  def decrease_fuel_level(amount)
+    return self.fuel_level = 0 if fuel_level - amount < 0
+
+    self.fuel_level -= amount
+  end
 end
