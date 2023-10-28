@@ -1,0 +1,8 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+water_and_food_to_coruscant:
+  description: Water and food to Coruscant
+  origin_planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2"
+  destination_planet_id: "d098bb62-7469-11ee-b7be-a8a1599ad2d2"
+  ship: millennium_falcon
+  value: 110
