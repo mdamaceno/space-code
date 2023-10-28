@@ -1,0 +1,8 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+millenium_falcon:
+  name: Millenium Falcon
+  fuel_capacity: 50
+  fuel_level: 40
+  weight_capacity: 40
+  pilot: hans_solo
