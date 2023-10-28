@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+minerals:
+  name: minerals
+  weight: 15
+  contract: water_and_food_to_coruscant
+
+food:
+  name: food
+  weight: 3
+  contract: water_and_food_to_coruscant
+
+water:
+  name: water
+  weight: 1
+  contract: water_and_food_to_coruscant
