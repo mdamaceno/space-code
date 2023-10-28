@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_27_013117) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_28_195244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_27_013117) do
     t.index ["origin_planet_id"], name: "index_routes_on_origin_planet_id"
   end
 
+  create_table "ships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "fuel_capacity", default: 0, null: false
+    t.integer "fuel_level", default: 0, null: false
+    t.integer "weight_capacity", default: 0, null: false
+    t.uuid "pilot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "routes", "planets", column: "destination_planet_id", on_delete: :cascade
   add_foreign_key "routes", "planets", column: "origin_planet_id", on_delete: :cascade
+  add_foreign_key "ships", "pilots", on_delete: :cascade
 end
