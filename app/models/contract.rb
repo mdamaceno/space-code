@@ -11,6 +11,8 @@ class Contract < ApplicationRecord
   validates :completed_at, comparison: { greater_than_or_equal_to: Time.zone.now }, allow_nil: true
   validates :value, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
+  scope :incomplete, -> { where(completed_at: nil) }
+
   def complete!
     update!(completed_at: Time.zone.now)
   end
