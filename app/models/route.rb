@@ -7,6 +7,12 @@ class Route < ApplicationRecord
   validates :fuel_cost, numericality: { greater_than_or_equal_to: 0 }
   validate :validates_origin_and_destination_planet_not_equal
 
+  def self.fuel_cost(origin, destination)
+    return 0 if origin == destination || origin.nil? || destination.nil?
+
+    self.where(origin_planet_id: origin.id, destination_planet_id: destination.id).first&.fuel_cost || 0
+  end
+
   private
 
   def validates_origin_and_destination_planet_not_equal
