@@ -11,3 +11,8 @@ two:
   destination_planet_id: "6a7c3c98-7674-11ee-9f60-a8a1599ad2d2" # Bespin
   blocked: false
   fuel_cost: 15
+
+blocked:
+  origin_planet_id: "d098bb62-7469-11ee-b7be-a8a1599ad2d2" # Coruscant
+  destination_planet_id: "6a7c3c98-7674-11ee-9f60-a8a1599ad2d2" # Bespin
+  blocked: true

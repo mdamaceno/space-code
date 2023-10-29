@@ -13,6 +13,10 @@ class Route < ApplicationRecord
     self.where(origin_planet_id: origin.id, destination_planet_id: destination.id).first&.fuel_cost || 0
   end
 
+  def blocked?
+    blocked
+  end
+
   private
 
   def validates_origin_and_destination_planet_not_equal

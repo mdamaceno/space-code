@@ -14,6 +14,13 @@ razor_crest:
   weight_capacity: 20
   pilot: din_djarin
 
+firespray:
+  name: Firespray
+  fuel_capacity: 60
+  fuel_level: 50
+  weight_capacity: 80
+  pilot: boba_fett
+
 ship_no_fuel:
   name: No fuel ship
   fuel_capacity: 10

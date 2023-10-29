@@ -24,8 +24,13 @@ class Pilot < ApplicationRecord
   end
 
   def travel_to!(planet)
+    route = Route.find_by(origin_planet_id: self.location&.id, destination_planet_id: planet.id)
+
+    raise CustomErrors::RouteBlockedError if route&.blocked?
+
+    fuel_cost = route&.fuel_cost || 0
+
     ActiveRecord::Base.transaction do
-      fuel_cost = Route.fuel_cost(self.location, planet)
       ship.update!(fuel_level: ship.fuel_level - fuel_cost)
       self.update!(planet: planet)
     end

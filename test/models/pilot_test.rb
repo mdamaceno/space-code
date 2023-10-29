@@ -126,6 +126,15 @@ class PilotTest < ActiveSupport::TestCase
     assert_equal fuel_level - fuel_cost, ship.reload.fuel_level
   end
 
+  test "travel_to! should raise an error if route is blocked" do
+    pilot = pilots(:boba_fett)
+    ship = pilot.ship
+    destination_planet = planets(:bespin)
+    assert_raises CustomErrors::RouteBlockedError do
+      pilot.travel_to!(destination_planet)
+    end
+  end
+
   test "accept_contract! should set ship id to the contract" do
     pilot = pilots(:din_djarin)
     contract = contracts(:without_ship_id)
