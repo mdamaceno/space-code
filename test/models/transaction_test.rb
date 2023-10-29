@@ -40,4 +40,24 @@ class TransactionTest < ActiveSupport::TestCase
     transaction = Transaction.new(@valid_attributes.merge(contract_id: nil))
     assert transaction.valid?
   end
+
+  test "pilot_credit should create a debit transaction with default description" do
+    pilot = pilots(:hans_solo)
+    amount = 100
+    transaction = Transaction.pilot_credit(pilot, amount)
+    assert_equal 'debit', transaction.kind
+    assert_equal pilot.certification, transaction.certification
+    assert_equal amount, transaction.amount
+    assert_equal "Credit for #{pilot.name}: -₭#{amount}", transaction.description
+  end
+
+  test "pilot_credit should create a debit transaction with custom description" do
+    pilot = pilots(:hans_solo)
+    amount = 100
+    transaction = Transaction.pilot_credit(pilot, amount, 'Test description')
+    assert_equal 'debit', transaction.kind
+    assert_equal pilot.certification, transaction.certification
+    assert_equal amount, transaction.amount
+    assert_equal 'Test description', transaction.description
+  end
 end
