@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   resources :pilots, only: [:create]
   resources :contracts, only: [:index, :create]
+  resources :travels, only: [:create]
 end
