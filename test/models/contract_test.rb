@@ -74,6 +74,11 @@ class ContractTest < ActiveSupport::TestCase
     assert_raises(CustomErrors::ContractAlreadyCompletedError) { contract.complete! }
   end
 
+  test "complete! raises an error if ship_id is not set" do
+    contract = contracts(:without_ship_id)
+    assert_raises(CustomErrors::ContractWithoutShipError) { contract.complete! }
+  end
+
   test "payload should return resources" do
     contract = contracts(:water_and_food_to_coruscant)
     assert contract.payload.size.positive?

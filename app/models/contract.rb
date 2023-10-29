@@ -15,6 +15,7 @@ class Contract < ApplicationRecord
 
   def complete!
     raise CustomErrors::ContractAlreadyCompletedError unless completed_at.nil?
+    raise CustomErrors::ContractWithoutShipError if ship_id.nil?
 
     ActiveRecord::Base.transaction do
       update!(completed_at: Time.zone.now)
