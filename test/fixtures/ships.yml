@@ -27,3 +27,10 @@ ship_no_fuel:
   fuel_level: 0
   weight_capacity: 10
   pilot: pilot_no_fuel
+
+ship_no_cargo_capacity:
+  name: No Cargo Space Ship
+  fuel_capacity: 10
+  fuel_level: 10
+  weight_capacity: 1
+  pilot: pilot_no_cargo_capacity

@@ -149,4 +149,12 @@ class PilotTest < ActiveSupport::TestCase
       pilot.accept_contract!(contract)
     end
   end
+
+  test "accept_contract! should raise an error if ship does not have enough cargo capacity" do
+    pilot = pilots(:pilot_no_cargo_capacity)
+    contract = contracts(:water_and_food_to_coruscant)
+    assert_raises CustomErrors::NoCargoCapacityError do
+      pilot.accept_contract!(contract)
+    end
+  end
 end

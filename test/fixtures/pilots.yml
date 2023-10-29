@@ -21,3 +21,8 @@ pilot_no_fuel:
   certification: 8768343
   name: No fuel
   age: 18
+
+pilot_no_cargo_capacity:
+  certification: 9915191
+  name: No Cargo Space Pilot
+  age: 18

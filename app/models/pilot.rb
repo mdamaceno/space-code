@@ -38,6 +38,7 @@ class Pilot < ApplicationRecord
 
   def accept_contract!(contract)
     raise CustomErrors::NoFuelError if ship.fuel_level.zero?
+    raise CustomErrors::NoCargoCapacityError if ship.weight_capacity < contract.payload.sum(:weight)
 
     contract.update!(ship_id: self.ship.id)
   end

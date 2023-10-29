@@ -4,4 +4,5 @@ module CustomErrors
   class ContractWithoutShipError < StandardError; end
   class NoFuelError < StandardError; end
   class RouteBlockedError < StandardError; end
+  class NoCargoCapacityError < StandardError; end
 end
