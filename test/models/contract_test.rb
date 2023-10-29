@@ -56,10 +56,27 @@ class ContractTest < ActiveSupport::TestCase
     assert_attribute_contains_error contract, :value, :greater_than_or_equal_to
   end
 
-  test "complete! sets completed_at" do
+  test "complete! sets completed_at and creates a debit transaction" do
     contract = contracts(:water_and_food_to_coruscant)
     contract.complete!
+    transaction = Transaction.order(created_at: :desc).first
     assert_not_nil contract.completed_at
+    assert_equal contract.value, transaction.amount
+    assert_equal contract.ship.pilot.certification, transaction.certification
+    assert_equal contract.id, transaction.contract_id
+    assert_equal "Contract #{contract.id} paid: -₭#{contract.value}", transaction.description
+  end
+
+  test "complete! raises an error if contract is already completed" do
+    contract = contracts(:water_and_food_to_coruscant)
+    contract.complete!
+
+    assert_raises(CustomErrors::ContractAlreadyCompletedError) { contract.complete! }
+  end
+
+  test "complete! raises an error if ship_id is not set" do
+    contract = contracts(:without_ship_id)
+    assert_raises(CustomErrors::ContractWithoutShipError) { contract.complete! }
   end
 
   test "payload should return resources" do

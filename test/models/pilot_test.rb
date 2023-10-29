@@ -64,4 +64,34 @@ class PilotTest < ActiveSupport::TestCase
     certification = Pilot.generate_valid_certification("445566")
     assert certification.length == 7
   end
+
+  test "buy_fuel should create a credit transaction" do
+    pilot = pilots(:hans_solo)
+    units = 2
+    amount = units * Planet::FUEL_UNIT_PRICE
+    transaction = pilot.buy_fuel(units)
+    assert_equal 'credit', transaction.kind
+    assert_equal pilot.certification, transaction.certification
+    assert_equal amount, transaction.amount
+    assert_equal "#{pilot.name} bought fuel: +₭#{amount}", transaction.description
+  end
+
+  test "buy_fuel should raise an error if the pilot does not have enough credits" do
+    pilot = pilots(:hans_solo)
+    units = 100
+    assert_raises CustomErrors::NotSufficientCreditsError do
+      pilot.buy_fuel(units)
+    end
+  end
+
+  test "credits should return the sum of all transactions with the pilot certification" do
+    pilot = pilots(:hans_solo)
+    units = 2
+    initial_amount = [
+      Transaction.debits.for_certification(pilot.certification).sum(:amount),
+      Transaction.credits.for_certification(pilot.certification).sum(:amount) * -1,
+    ].sum
+    pilot.buy_fuel(units)
+    assert_equal initial_amount - (units * Planet::FUEL_UNIT_PRICE), pilot.credits
+  end
 end
