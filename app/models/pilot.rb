@@ -1,5 +1,6 @@
 class Pilot < ApplicationRecord
   include Certificatable
+  include Buyer
 
   has_one :ship
 

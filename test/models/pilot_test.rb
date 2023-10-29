@@ -64,4 +64,15 @@ class PilotTest < ActiveSupport::TestCase
     certification = Pilot.generate_valid_certification("445566")
     assert certification.length == 7
   end
+
+  test "buy_fuel should create a credit transaction" do
+    pilot = pilots(:hans_solo)
+    units = 2
+    amount = units * Planet::FUEL_UNIT_PRICE
+    transaction = pilot.buy_fuel(units)
+    assert_equal 'credit', transaction.kind
+    assert_equal pilot.certification, transaction.certification
+    assert_equal amount, transaction.amount
+    assert_equal "#{pilot.name} bought fuel: +₭#{amount}", transaction.description
+  end
 end
