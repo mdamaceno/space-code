@@ -14,6 +14,8 @@ class Contract < ApplicationRecord
   scope :incomplete, -> { where(completed_at: nil) }
 
   def complete!
+    raise CustomErrors::ContractAlreadyCompletedError unless completed_at.nil?
+
     ActiveRecord::Base.transaction do
       update!(completed_at: Time.zone.now)
       Transaction.send_credit(ship.pilot, value, "Contract #{id} paid: -₭#{value}", id)

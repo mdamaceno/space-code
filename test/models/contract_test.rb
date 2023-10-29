@@ -67,6 +67,13 @@ class ContractTest < ActiveSupport::TestCase
     assert_equal "Contract #{contract.id} paid: -₭#{contract.value}", transaction.description
   end
 
+  test "complete! raises an error if contract is already completed" do
+    contract = contracts(:water_and_food_to_coruscant)
+    contract.complete!
+
+    assert_raises(CustomErrors::ContractAlreadyCompletedError) { contract.complete! }
+  end
+
   test "payload should return resources" do
     contract = contracts(:water_and_food_to_coruscant)
     assert contract.payload.size.positive?
