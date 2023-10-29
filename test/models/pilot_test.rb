@@ -75,4 +75,15 @@ class PilotTest < ActiveSupport::TestCase
     assert_equal amount, transaction.amount
     assert_equal "#{pilot.name} bought fuel: +₭#{amount}", transaction.description
   end
+
+  test "credits should return the sum of all transactions with the pilot certification" do
+    pilot = pilots(:hans_solo)
+    units = 2
+    initial_amount = [
+      Transaction.debits.for_certification(pilot.certification).sum(:amount),
+      Transaction.credits.for_certification(pilot.certification).sum(:amount) * -1,
+    ].sum
+    pilot.buy_fuel(units)
+    assert_equal initial_amount - (units * Planet::FUEL_UNIT_PRICE), pilot.credits
+  end
 end

@@ -5,3 +5,9 @@ one:
   kind: credit
   amount: 10
   description: "Han Solo bought fuel: +₭10"
+
+two:
+  certification: 9988774
+  kind: debit
+  amount: 300
+  description: "Credit for Han Solo: -₭300"
