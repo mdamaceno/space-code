@@ -9,8 +9,14 @@ class Transaction < ApplicationRecord
   scope :debits, -> { where(kind: 'debit') }
   scope :for_certification, ->(certification) { where(certification: certification) }
 
-  def self.send_credit(receiver, amount, description = nil)
+  def self.send_credit(receiver, amount, description = nil, contract_id = nil)
     description = "Credit for #{receiver.name}: -₭#{amount}" if description.nil?
-    self.create!(amount: amount, kind: 'debit', certification: receiver.certification, description: description)
+    self.create!(
+      amount: amount,
+      kind: 'debit',
+      certification: receiver.certification,
+      description: description,
+      contract_id: contract_id,
+    )
   end
 end
