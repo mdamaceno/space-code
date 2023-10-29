@@ -7,7 +7,7 @@ module Certificatable
 
     normalizes :certification, with: -> (certification) { certification&.gsub(/[^0-9]/, "") }
 
-    def self.generate_valid_certification(num)
+    def self.generate_valid_certification(num = srand.to_s.last(6))
       digits = num.to_s[0..5].chars.map(&:to_i)
 
       sum = digits.reverse.each_with_index do |digit, index|
