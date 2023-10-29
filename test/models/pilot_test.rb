@@ -6,7 +6,7 @@ class PilotTest < ActiveSupport::TestCase
       name: 'Bo Katan',
       age: 18,
       certification: '7635290',
-      location: 'space',
+      location: nil,
     }
   end
 
@@ -60,6 +60,11 @@ class PilotTest < ActiveSupport::TestCase
       pilot = Pilot.new(@valid_attributes.merge(certification: certification))
       assert pilot.valid?
     end
+  end
+
+  test "location should be optional" do
+    pilot = Pilot.new(@valid_attributes.merge(location: nil))
+    assert pilot.valid?
   end
 
   test "generate_valid_certification should return a valid certification" do
