@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_28_222040) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_28_233757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_222040) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "certification", null: false
+    t.string "kind", null: false
+    t.integer "amount", default: 0, null: false
+    t.string "description", default: "", null: false
+    t.uuid "contract_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "contracts", "planets", column: "destination_planet_id", on_delete: :cascade
   add_foreign_key "contracts", "planets", column: "origin_planet_id", on_delete: :cascade
   add_foreign_key "contracts", "ships", on_delete: :nullify
@@ -78,4 +88,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_222040) do
   add_foreign_key "routes", "planets", column: "destination_planet_id", on_delete: :cascade
   add_foreign_key "routes", "planets", column: "origin_planet_id", on_delete: :cascade
   add_foreign_key "ships", "pilots", on_delete: :cascade
+  add_foreign_key "transactions", "contracts", on_delete: :nullify
 end
