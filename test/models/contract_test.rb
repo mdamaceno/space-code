@@ -8,6 +8,7 @@ class ContractTest < ActiveSupport::TestCase
       destination_planet_id: planets(:naboo).id,
       ship_id: ships(:millennium_falcon).id,
       completed_at: nil,
+      value: 30,
     }
   end
 
@@ -52,8 +53,8 @@ class ContractTest < ActiveSupport::TestCase
   end
 
   test "value should be greater than or equal to 0" do
-    contract = Contract.new(@valid_attributes.tap { |a| a[:value] = -1 })
-    assert_attribute_contains_error contract, :value, :greater_than_or_equal_to
+    contract = Contract.new(@valid_attributes.tap { |a| a[:value] = 0 })
+    assert_attribute_contains_error contract, :value, :greater_than
   end
 
   test "complete! sets completed_at and creates a debit transaction" do

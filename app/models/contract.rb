@@ -9,7 +9,7 @@ class Contract < ApplicationRecord
   validates :origin_planet_id, presence: true
   validates :destination_planet_id, presence: true
   validates :completed_at, comparison: { greater_than_or_equal_to: Time.zone.now }, allow_nil: true
-  validates :value, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :value, presence: true, numericality: { greater_than: 0 }
 
   scope :incomplete, -> { where(completed_at: nil) }
 
