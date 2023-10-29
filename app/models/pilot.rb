@@ -22,4 +22,12 @@ class Pilot < ApplicationRecord
   def location=(planet)
     self.planet = planet
   end
+
+  def travel_to!(planet)
+    ActiveRecord::Base.transaction do
+      fuel_cost = Route.fuel_cost(self.location, planet)
+      ship.update!(fuel_level: ship.fuel_level - fuel_cost)
+      self.update!(planet: planet)
+    end
+  end
 end

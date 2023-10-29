@@ -7,3 +7,7 @@ coruscant:
 naboo:
   id: "d7647116-7469-11ee-87c9-a8a1599ad2d2"
   name: Naboo
+
+bespin:
+  id: "6a7c3c98-7674-11ee-9f60-a8a1599ad2d2"
+  name: Bespin

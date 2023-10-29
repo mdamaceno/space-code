@@ -4,3 +4,9 @@ hans_solo:
   certification: 9988774
   name: Hans Solo
   age: 25
+
+din_djarin:
+  certification: 7729407
+  name: Din Djarin
+  age: 30
+  planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2" # naboo

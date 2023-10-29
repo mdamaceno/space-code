@@ -6,3 +6,10 @@ millennium_falcon:
   fuel_level: 40
   weight_capacity: 40
   pilot: hans_solo
+
+razor_crest:
+  name: Razor Crest
+  fuel_capacity: 30
+  fuel_level: 30
+  weight_capacity: 20
+  pilot: din_djarin

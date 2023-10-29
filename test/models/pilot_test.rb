@@ -101,4 +101,28 @@ class PilotTest < ActiveSupport::TestCase
     pilot.buy_fuel(units)
     assert_equal initial_amount - (units * Planet::FUEL_UNIT_PRICE), pilot.credits
   end
+
+  test "travel_to! should keep fuel_level of the ship the same and change pilot location if location is not set yet" do
+    pilot = pilots(:hans_solo)
+    ship = pilot.ship
+    destination_planet = planets(:coruscant)
+    fuel_level = ship.fuel_level
+    location = pilot.location
+    pilot.travel_to!(destination_planet)
+
+    assert_equal fuel_level, ship.reload.fuel_level
+    assert_equal destination_planet, pilot.reload.location
+  end
+
+  test "travel_to! should decrease fuel_level of the ship and change pilot location if location is set" do
+    pilot = pilots(:din_djarin)
+    ship = pilot.ship
+    destination_planet = planets(:bespin)
+    fuel_level = ship.fuel_level
+    fuel_cost = Route.fuel_cost(pilot.location, destination_planet)
+    pilot.travel_to!(destination_planet)
+
+    assert_equal destination_planet, pilot.reload.location
+    assert_equal fuel_level - fuel_cost, ship.reload.fuel_level
+  end
 end

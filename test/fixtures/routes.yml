@@ -1,7 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  origin_planet_id: "d098bb62-7469-11ee-b7be-a8a1599ad2d2"
-  destination_planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2"
+  origin_planet_id: "d098bb62-7469-11ee-b7be-a8a1599ad2d2" # Coruscant
+  destination_planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2" # Naboo
   blocked: false
   fuel_cost: 10
+
+two:
+  origin_planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2" # Naboo
+  destination_planet_id: "6a7c3c98-7674-11ee-9f60-a8a1599ad2d2" # Bespin
+  blocked: false
+  fuel_cost: 15
