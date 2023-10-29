@@ -20,6 +20,12 @@ class ContractsController < ApplicationController
     end
   end
 
+  def accept
+    contract = Contract.find(params[:id])
+    pilot = Pilot.find(accept_params[:pilot_id])
+    pilot.accept_contract!(contract)
+  end
+
   private
 
   def contract_params
@@ -29,5 +35,9 @@ class ContractsController < ApplicationController
               :destination_planet_id,
               :value,
               payload: [[ :name, :weight ]])
+  end
+
+  def accept_params
+    params.require(:contract).permit(:pilot_id)
   end
 end

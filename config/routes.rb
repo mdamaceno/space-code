@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :pilots, only: [:create]
-  resources :contracts, only: [:index, :create]
+  resources :contracts, only: [:index, :create] do
+    member do
+      post :accept, to: "contracts#accept", as: :accept
+    end
+  end
   resources :travels, only: [:create]
 end

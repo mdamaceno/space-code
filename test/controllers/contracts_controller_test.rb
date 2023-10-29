@@ -63,4 +63,16 @@ class ContractsControllerTest < ActionDispatch::IntegrationTest
     assert parsed_response['contracts'].size > 0
     assert_response :success
   end
+
+  test "should update ship_id when contract is accepted" do
+    contract = contracts(:without_ship_id)
+    pilot = pilots(:hans_solo)
+    assert contract.ship_id.nil?
+
+    post accept_contract_url(contract), params: { contract: { pilot_id: pilot.id } }
+    contract.reload
+
+    assert contract.ship_id == pilot.ship.id
+    assert_response :no_content
+  end
 end
