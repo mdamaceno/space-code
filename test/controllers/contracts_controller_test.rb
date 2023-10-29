@@ -54,4 +54,13 @@ class ContractsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
   end
+
+  test "should retrive all open contracts" do
+    get contracts_url
+    parsed_response = JSON.parse(response.body)
+
+    assert parsed_response['contracts'].all? { |c| c['completed_at'].nil? }
+    assert parsed_response['contracts'].size > 0
+    assert_response :success
+  end
 end

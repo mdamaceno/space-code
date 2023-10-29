@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :pilots, only: [:create]
-  resources :contracts, only: [:create]
+  resources :contracts, only: [:index, :create]
 end

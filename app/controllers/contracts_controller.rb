@@ -1,4 +1,10 @@
 class ContractsController < ApplicationController
+  def index
+    contracts = Contract.incomplete.includes(:payload)
+    data = { contracts: contracts.as_json(include: :payload) }
+    render json: data, status: :ok
+  end
+
   def create
     contract = Contract.new(
       contract_params.except(:payload)
