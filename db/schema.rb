@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_28_233757) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_29_145536) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_233757) do
     t.integer "age", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "planet_id"
     t.index ["certification"], name: "index_pilots_on_certification", unique: true
   end
 
@@ -84,6 +85,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_233757) do
   add_foreign_key "contracts", "planets", column: "destination_planet_id", on_delete: :cascade
   add_foreign_key "contracts", "planets", column: "origin_planet_id", on_delete: :cascade
   add_foreign_key "contracts", "ships", on_delete: :nullify
+  add_foreign_key "pilots", "planets", on_delete: :nullify
   add_foreign_key "resources", "contracts", on_delete: :cascade
   add_foreign_key "routes", "planets", column: "destination_planet_id", on_delete: :cascade
   add_foreign_key "routes", "planets", column: "origin_planet_id", on_delete: :cascade
