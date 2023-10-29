@@ -125,4 +125,19 @@ class PilotTest < ActiveSupport::TestCase
     assert_equal destination_planet, pilot.reload.location
     assert_equal fuel_level - fuel_cost, ship.reload.fuel_level
   end
+
+  test "accept_contract! should set ship id to the contract" do
+    pilot = pilots(:din_djarin)
+    contract = contracts(:without_ship_id)
+    pilot.accept_contract!(contract)
+    assert_equal pilot.ship.id, contract.reload.ship_id
+  end
+
+  test "accept_contract! should raise an error if ship does not have fuel" do
+    pilot = pilots(:pilot_no_fuel)
+    contract = contracts(:without_ship_id)
+    assert_raises CustomErrors::NoFuelError do
+      pilot.accept_contract!(contract)
+    end
+  end
 end

@@ -13,3 +13,10 @@ razor_crest:
   fuel_level: 30
   weight_capacity: 20
   pilot: din_djarin
+
+ship_no_fuel:
+  name: No fuel ship
+  fuel_capacity: 10
+  fuel_level: 0
+  weight_capacity: 10
+  pilot: pilot_no_fuel

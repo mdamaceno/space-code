@@ -30,4 +30,10 @@ class Pilot < ApplicationRecord
       self.update!(planet: planet)
     end
   end
+
+  def accept_contract!(contract)
+    raise CustomErrors::NoFuelError if ship.fuel_level.zero?
+
+    contract.update!(ship_id: self.ship.id)
+  end
 end

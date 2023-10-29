@@ -10,3 +10,8 @@ din_djarin:
   name: Din Djarin
   age: 30
   planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2" # naboo
+
+pilot_no_fuel:
+  certification: 8768343
+  name: No fuel
+  age: 18
