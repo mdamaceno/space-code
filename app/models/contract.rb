@@ -17,6 +17,10 @@ class Contract < ApplicationRecord
     raise CustomErrors::ContractAlreadyCompletedError unless completed_at.nil?
     raise CustomErrors::ContractWithoutShipError if ship_id.nil?
 
+    if completed_at.nil? && ship.pilot.planet_id != destination_planet_id
+      raise CustomErrors::PilotNotInDestinationPlanetError
+    end
+
     ActiveRecord::Base.transaction do
       update!(completed_at: Time.zone.now)
       Transaction.send_credit(ship.pilot, value, "Contract #{id} paid: -₭#{value}", id)

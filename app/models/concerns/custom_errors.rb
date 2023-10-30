@@ -5,5 +5,6 @@ module CustomErrors
   class NoFuelError < StandardError; end
   class RouteBlockedError < StandardError; end
   class NoCargoCapacityError < StandardError; end
+  class PilotNotInDestinationPlanetError < StandardError; end
   class PilotNotInOriginPlanetError < StandardError; end
 end

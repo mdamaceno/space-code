@@ -59,6 +59,7 @@ class ContractTest < ActiveSupport::TestCase
 
   test "complete! sets completed_at and creates a debit transaction" do
     contract = contracts(:water_and_food_to_coruscant)
+    contract.ship.pilot.update!(planet_id: planets(:coruscant).id)
     contract.complete!
     transaction = Transaction.order(created_at: :desc).first
     assert_not_nil contract.completed_at
@@ -70,9 +71,17 @@ class ContractTest < ActiveSupport::TestCase
 
   test "complete! raises an error if contract is already completed" do
     contract = contracts(:water_and_food_to_coruscant)
+    contract.ship.pilot.update!(planet_id: planets(:coruscant).id)
     contract.complete!
 
     assert_raises(CustomErrors::ContractAlreadyCompletedError) { contract.complete! }
+  end
+
+  test "complete! raises an error if pilot is not in the destination planet" do
+    contract = contracts(:water_and_food_to_coruscant)
+    contract.ship.pilot.update!(planet_id: planets(:naboo).id)
+
+    assert_raises(CustomErrors::PilotNotInDestinationPlanetError) { contract.complete! }
   end
 
   test "complete! raises an error if ship_id is not set" do
