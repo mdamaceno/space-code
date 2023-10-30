@@ -12,3 +12,10 @@ without_ship_id:
   origin_planet_id: "d098bb62-7469-11ee-b7be-a8a1599ad2d2" # coruscant
   destination_planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2" # naboo
   value: 300
+
+din_djarin_contract:
+  description: Water to Coruscant
+  origin_planet_id: "d7647116-7469-11ee-87c9-a8a1599ad2d2" # naboo
+  destination_planet_id: "d098bb62-7469-11ee-b7be-a8a1599ad2d2" # coruscant
+  value: 30
+  ship: razor_crest

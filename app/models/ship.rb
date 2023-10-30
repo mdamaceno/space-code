@@ -1,5 +1,6 @@
 class Ship < ApplicationRecord
   belongs_to :pilot
+  has_many :contracts
 
   validates :name, presence: true, length: { minimum: 3, maximum: 150 }
   validates :fuel_capacity, presence: true, numericality: { greater_than_or_equal_to: 0 }

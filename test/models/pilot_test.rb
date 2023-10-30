@@ -126,6 +126,21 @@ class PilotTest < ActiveSupport::TestCase
     assert_equal fuel_level - fuel_cost, ship.reload.fuel_level
   end
 
+  test "travel_to! sets completed_at to the contract if the pilot has a contract and is in the destination planet" do
+    pilot = pilots(:din_djarin)
+    ship = pilot.ship
+    destination_planet = planets(:coruscant)
+    contract = contracts(:din_djarin_contract)
+    pilot.travel_to!(destination_planet)
+    transaction = Transaction.where(contract_id: contract.id).last
+
+    assert_equal destination_planet, pilot.reload.location
+    assert_not contract.reload.completed_at.nil?
+    assert_equal contract.value, transaction.amount
+    assert_equal contract.id, transaction.contract_id
+    assert_equal pilot.certification, transaction.certification
+  end
+
   test "travel_to! should raise an error if route is blocked" do
     pilot = pilots(:boba_fett)
     ship = pilot.ship

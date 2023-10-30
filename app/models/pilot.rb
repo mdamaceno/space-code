@@ -4,6 +4,7 @@ class Pilot < ApplicationRecord
 
   belongs_to :planet, optional: true
   has_one :ship
+  has_many :contracts, through: :ship
 
   validates :name, presence: true, length: { minimum: 3, maximum: 150 }
   validates :age, presence: true, numericality: { greater_than_or_equal_to: 18 }
@@ -33,6 +34,7 @@ class Pilot < ApplicationRecord
     ActiveRecord::Base.transaction do
       ship.update!(fuel_level: ship.fuel_level - fuel_cost)
       self.update!(planet: planet)
+      contracts.where(destination_planet_id: planet.id, ship_id: ship.id).each(&:complete!)
     end
   end
 
