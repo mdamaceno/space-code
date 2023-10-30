@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     end
   end
   resources :travels, only: [:create]
+  resource :fuel, only: [:create]
 end

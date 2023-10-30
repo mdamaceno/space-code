@@ -10,7 +10,12 @@ module Buyer
       description: "#{name} bought fuel: +₭#{amount}",
     )
 
-    transaction.save!
-    transaction
+    ActiveRecord::Base.transaction do
+      self.ship.fuel_level += units
+      self.ship.save!
+
+      transaction.save!
+      transaction
+    end
   end
 end
