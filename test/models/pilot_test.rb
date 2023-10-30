@@ -137,6 +137,7 @@ class PilotTest < ActiveSupport::TestCase
 
   test "accept_contract! should set ship id to the contract" do
     pilot = pilots(:din_djarin)
+    pilot.update!(planet: planets(:coruscant))
     contract = contracts(:without_ship_id)
     pilot.accept_contract!(contract)
     assert_equal pilot.ship.id, contract.reload.ship_id
@@ -154,6 +155,15 @@ class PilotTest < ActiveSupport::TestCase
     pilot = pilots(:pilot_no_cargo_capacity)
     contract = contracts(:water_and_food_to_coruscant)
     assert_raises CustomErrors::NoCargoCapacityError do
+      pilot.accept_contract!(contract)
+    end
+  end
+
+  test "accept_contract! should raise an error if pilot is not in the origin planet of the contract" do
+    pilot = pilots(:din_djarin)
+    pilot.update!(planet: planets(:bespin))
+    contract = contracts(:water_and_food_to_coruscant)
+    assert_raises CustomErrors::PilotNotInOriginPlanetError do
       pilot.accept_contract!(contract)
     end
   end

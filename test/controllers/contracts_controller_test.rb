@@ -67,6 +67,7 @@ class ContractsControllerTest < ActionDispatch::IntegrationTest
   test "should update ship_id when contract is accepted" do
     contract = contracts(:without_ship_id)
     pilot = pilots(:hans_solo)
+    pilot.update!(planet_id: contract.origin_planet_id)
     assert contract.ship_id.nil?
 
     post accept_contract_url(contract), params: { contract: { pilot_id: pilot.id } }
