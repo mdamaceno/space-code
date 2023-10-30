@@ -1,7 +1,7 @@
 class Contract < ApplicationRecord
   belongs_to :ship, optional: true
-  belongs_to :planet, foreign_key: :origin_planet_id
-  belongs_to :planet, foreign_key: :destination_planet_id
+  belongs_to :planet, foreign_key: :origin_planet_id, inverse_of: :origin_contracts
+  belongs_to :planet, foreign_key: :destination_planet_id, inverse_of: :destination_contracts
 
   has_many :payload, dependent: :destroy, class_name: "Resource"
 
@@ -12,6 +12,7 @@ class Contract < ApplicationRecord
   validates :value, presence: true, numericality: { greater_than: 0 }
 
   scope :incomplete, -> { where(completed_at: nil) }
+  scope :completed, -> { where.not(completed_at: nil) }
 
   def complete!
     raise CustomErrors::ContractAlreadyCompletedError unless completed_at.nil?

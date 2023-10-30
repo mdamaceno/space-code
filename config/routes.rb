@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   end
   resources :travels, only: [:create]
   resource :fuel, only: [:create]
+
+  scope :reports do
+    get 'total-weight-by-each-planet', to: "reports#total_weight_by_each_planet", as: :reports_total_weight_by_each_planet
+  end
 end
