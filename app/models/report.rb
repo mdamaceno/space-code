@@ -23,4 +23,23 @@ class Report
       }
     end
   end
+
+  def percentage_resource_by_each_pilot
+    Pilot.includes(:contracts).map do |pilot|
+      contracts = pilot.contracts.completed.includes(:payload)
+      resources = contracts.map(&:payload).flatten.pluck(:name, :weight)
+      total_resources = resources.sum(&:second)
+      percentage_by_resource = resources.group_by(&:first).map do |k, r|
+        [k, r.sum(&:second) / total_resources.to_f * 100]
+      end.sort
+
+      {
+        pilot.name.downcase => {
+          "water" => percentage_by_resource.select { |r| r.first == 'water' }.second,
+          "food" => percentage_by_resource.select { |r| r.first == 'food' }.second,
+          "minerals" => percentage_by_resource.select { |r| r.first == 'minerals' }.second,
+        },
+      }
+    end
+  end
 end
