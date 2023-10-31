@@ -35,9 +35,9 @@ class Report
 
       {
         pilot.name.downcase => {
-          "water" => percentage_by_resource.select { |r| r.first == 'water' }.second,
-          "food" => percentage_by_resource.select { |r| r.first == 'food' }.second,
-          "minerals" => percentage_by_resource.select { |r| r.first == 'minerals' }.second,
+          "water" => percentage_by_resource.find { |r| r.first == 'water' }&.second || 0,
+          "food" => percentage_by_resource.find { |r| r.first == 'food' }&.second || 0,
+          "minerals" => percentage_by_resource.find { |r| r.first == 'minerals' }&.second || 0,
         },
       }
     end

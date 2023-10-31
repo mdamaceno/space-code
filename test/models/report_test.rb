@@ -62,16 +62,15 @@ class ReportTest < ActiveSupport::TestCase
 
     resources = contracts.map(&:payload).flatten.pluck(:name, :weight)
     total_resources = resources.sum(&:second)
-    total_resources = resources.sum(&:second)
     percentage_by_resource = resources.group_by(&:first).map do |k, r|
       [k, r.sum(&:second) / total_resources.to_f * 100]
     end.sort
 
     result = {
       "luke skywalker" => {
-        "water" => percentage_by_resource.select { |r| r.first == 'water' }.second,
-        "food" => percentage_by_resource.select { |r| r.first == 'food' }.second,
-        "minerals" => percentage_by_resource.select { |r| r.first == 'minerals' }.second,
+        "water" => percentage_by_resource.find { |r| r.first == 'water' }&.second,
+        "food" => percentage_by_resource.find { |r| r.first == 'food' }&.second,
+        "minerals" => percentage_by_resource.find { |r| r.first == 'minerals' }&.second,
       },
     }
 
