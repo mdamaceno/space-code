@@ -6,6 +6,7 @@ bundle check || BUNDLE_JOBS=4 bundle install
 
 bin/rake db:create
 bin/rake db:migrate
+bin/rake db:seed
 
 rm -f /app/tmp/pids/server.pid
 
