@@ -41,7 +41,7 @@ class Pilot < ApplicationRecord
   def accept_contract!(contract)
     raise CustomErrors::NoFuelError if ship.fuel_level.zero?
     raise CustomErrors::NoCargoCapacityError if ship.weight_capacity < contract.payload.sum(:weight)
-    raise CustomErrors::PilotNotInOriginPlanetError if contract.origin_planet_id != self.planet.id
+    raise CustomErrors::PilotNotInOriginPlanetError if contract.origin_planet_id != self.planet&.id
 
     contract.update!(ship_id: self.ship.id)
   end
