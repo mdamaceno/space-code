@@ -42,4 +42,8 @@ class Report
       }
     end
   end
+
+  def transaction_ledger
+    Transaction.order(created_at: :asc).map(&:description)
+  end
 end

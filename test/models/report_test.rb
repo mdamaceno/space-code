@@ -78,4 +78,13 @@ class ReportTest < ActiveSupport::TestCase
     report = Report.new
     assert_includes report.percentage_resource_by_each_pilot, result
   end
+
+  test "should return transaction ledger sorted by date (oldest to newest)" do
+    transaction1 = FactoryBot.create(:transaction, created_at: Time.zone.now - 2.days)
+    transaction2 = FactoryBot.create(:transaction, created_at: Time.zone.now - 1.day)
+    transaction3 = FactoryBot.create(:transaction, created_at: Time.zone.now - 3.day)
+
+    report = Report.new
+    assert_equal report.transaction_ledger[0..2], [transaction3, transaction1, transaction2].map(&:description)
+  end
 end

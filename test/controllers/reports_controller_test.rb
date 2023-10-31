@@ -10,4 +10,9 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     get reports_percentage_resource_by_each_pilot_url
     assert_response :success
   end
+
+  test "should get transaction_ledger" do
+    get reports_transaction_ledger_url
+    assert_response :success
+  end
 end

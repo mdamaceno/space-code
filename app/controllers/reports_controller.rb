@@ -6,4 +6,8 @@ class ReportsController < ApplicationController
   def percentage_resource_by_each_pilot
     render json: Report.new.percentage_resource_by_each_pilot
   end
+
+  def transaction_ledger
+    render json: Report.new.transaction_ledger
+  end
 end

@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   scope :reports do
     get 'total-weight-by-each-planet', to: "reports#total_weight_by_each_planet", as: :reports_total_weight_by_each_planet
     get 'percentage-resource-by-each-pilot', to: "reports#percentage_resource_by_each_pilot", as: :reports_percentage_resource_by_each_pilot
+    get 'transaction-ledger', to: "reports#transaction_ledger", as: :reports_transaction_ledger
   end
 end
