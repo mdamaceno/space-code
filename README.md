@@ -5,8 +5,8 @@ The pilots can fly freely through the galaxy reaching the planets out to complet
 
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [How to use](#howto)
-- [Run the tests](#run_the_tests)
+- [How to use](#how-to-use)
+- [Run the tests](#run-the-tests)
 
 ## Requirements
 
