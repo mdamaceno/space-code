@@ -7,10 +7,41 @@
   </head>
   <body>
     <h1>Space Code Platform</h1>
+    <a href="/#new-pilot">New Pilot</a> | 
+    <a href="/#new-contract">New Contract</a>
     <add-pilot></add-pilot>
   </body>
 
   <script type="module">
     import './js/components/add-pilot.js'
+
+    router([
+      {
+        hash: '#new-pilot',
+        element: 'add-pilot'
+      },
+      {
+        hash: '#new-contract',
+        element: 'add-contract'
+      }
+    ]);
+
+    function router(routes) {
+      setInterval(() => {
+        const hash = window.location.hash;
+
+        routes.forEach(route => {
+          const element = document.querySelector(route.element);
+
+          if (element) {
+            if (hash === route.hash) {
+              element.style.display = 'block';
+            } else {
+              element.style.display = 'none';
+            }
+          }
+        });
+      }, 50);
+    }
   </script>
 </html>
