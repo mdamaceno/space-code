@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "pages#index"
 
   scope :api do
     resources :pilots, only: [:create]
@@ -24,4 +24,6 @@ Rails.application.routes.draw do
       get 'transaction-ledger', to: "reports#transaction_ledger", as: :reports_transaction_ledger
     end
   end
+
+  get '/home', to: "pages#index", as: :pages_home
 end
