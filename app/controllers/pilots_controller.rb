@@ -10,7 +10,10 @@ class PilotsController < ApplicationController
       data = { pilot: pilot.as_json.merge(ship: pilot.ship.as_json) }
       render json: data, status: :created
     else
-      messages = { pilot: pilot.errors.messages.merge({ ship: pilot.ship.errors.messages }) }
+      pilot_errors = pilot.errors.messages
+      ship_errors = pilot.ship.errors.messages
+      messages = pilot_errors.merge(ship_errors || {})
+
       render json: messages, status: :unprocessable_entity
     end
   end
