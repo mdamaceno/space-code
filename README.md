@@ -40,7 +40,7 @@ As an API, the interaction with the system is made hitting some endpoints. They 
 
 ### List planets
 #### Request
-`GET /planets`
+`GET /api/planets`
 
 #### Response
 
@@ -81,7 +81,7 @@ Content-Type: application/json
 
 ### Create pilot
 #### Request
-`POST /pilots`
+`POST /api/pilots`
 
 Body:
 ```
@@ -130,7 +130,7 @@ Content-Type: application/json
 
 ### Create contract
 #### Request
-`POST /contracts`
+`POST /api/contracts`
 
 Body
 ```
@@ -208,7 +208,7 @@ Content-Type: application/json
 
 ### Fly to the planet
 #### Request
-`POST /travels`
+`POST /api/travels`
 
 Body
 ```
@@ -229,7 +229,7 @@ Content-Type: application/json
 
 ### Accept contract
 #### Request
-`POST /contracts/:id/accept`
+`POST /api/contracts/:id/accept`
 
 Body
 ```
@@ -250,7 +250,7 @@ Content-Type: application/json
 
 ### List open contracts
 #### Request
-`GET /contracts`
+`GET /api/contracts`
 
 #### Response
 
@@ -305,7 +305,7 @@ Content-Type: application/json
 
 ### Register a refill of the fuel
 #### Request
-`POST /fuel`
+`POST /api/fuel`
 
 Body
 ```
@@ -329,13 +329,13 @@ Content-Type: application/json
 #### Total weight in tons of each resource sent and received by each planet
 
 #### Request
-`GET /reports/total-weight-by-each-planet`
+`GET /api/reports/total-weight-by-each-planet`
 
 #### Percentage of resource type transported by each pilot
-`GET /reports/total-weight-by-each-planet`
+`GET /api/reports/total-weight-by-each-planet`
 
 #### Intergalactic Federation transactions ledger sorted by date (oldest to newest)
-`GET /reports/transaction-ledger`
+`GET /api/reports/transaction-ledger`
 
 ## Run the tests
 
