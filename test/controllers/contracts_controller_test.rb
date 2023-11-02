@@ -32,7 +32,7 @@ class ContractsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create contract if payload is invalid" do
-    @valid_contract[:payload][0][:weight] = 0
+    @valid_contract[:payload][0][:weight] = -1
 
     assert_no_difference('Contract.count') do
       assert_no_difference('Resource.count') do

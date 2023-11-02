@@ -15,7 +15,10 @@ class ContractsController < ApplicationController
       data = { contract: contract.as_json.merge(payload: contract.payload.as_json) }
       render json: data, status: :created
     else
-      messages = { contract: contract.errors.messages.merge({ payload: contract.payload.map(&:errors) }) }
+      contract_errors = contract.errors.messages
+      payload_errors = contract.payload.map(&:errors).map(&:messages).reject(&:empty?).first
+      messages = contract_errors.merge(payload_errors || {})
+
       render json: messages, status: :unprocessable_entity
     end
   end
