@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Space Code Platform</title>
+  </head>
+  <body>
+    <h1>Space Code Platform</h1>
+    <a href="/#new-pilot">New Pilot</a> | 
+    <a href="/#new-contract">New Contract</a>
+    <add-pilot></add-pilot>
+    <add-contract></add-contract>
+  </body>
+
+  <script type="module">
+    import './js/components/add-pilot.js'
+    import './js/components/add-contract.js'
+
+    router([
+      {
+        hash: '#new-pilot',
+        element: 'add-pilot'
+      },
+      {
+        hash: '#new-contract',
+        element: 'add-contract'
+      }
+    ]);
+
+    function router(routes) {
+      setInterval(() => {
+        const hash = window.location.hash;
+
+        routes.forEach(route => {
+          const element = document.querySelector(route.element);
+
+          if (element) {
+            if (hash === route.hash) {
+              element.style.display = 'block';
+            } else {
+              element.style.display = 'none';
+            }
+          }
+        });
+      }, 50);
+    }
+  </script>
+</html>

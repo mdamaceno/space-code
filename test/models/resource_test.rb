@@ -30,7 +30,7 @@ class ResourceTest < ActiveSupport::TestCase
   end
 
   test "weight should be greater than or equal to 0" do
-    resource = Resource.new(@valid_attributes.tap { |a| a[:weight] = 0 })
-    assert_attribute_contains_error resource, :weight, :greater_than
+    resource = Resource.new(@valid_attributes.tap { |a| a[:weight] = -1 })
+    assert_attribute_contains_error resource, :weight, :greater_than_or_equal_to
   end
 end
