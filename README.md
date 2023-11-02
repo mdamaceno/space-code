@@ -6,6 +6,7 @@ The pilots can fly freely through the galaxy reaching the planets out to complet
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [How to use](#how-to-use)
+- [Bonus](#bonus)
 - [Run the tests](#run-the-tests)
 
 ## Requirements
@@ -336,6 +337,12 @@ Content-Type: application/json
 
 #### Intergalactic Federation transactions ledger sorted by date (oldest to newest)
 `GET /api/reports/transaction-ledger`
+
+## Bonus
+
+There is a frontend for this app. You can access it by hitting the root path. All of its implementation is in `public` directory.
+
+Unfortunately, the entire app is not covered by the frontend, but I did my best.
 
 ## Run the tests
 
