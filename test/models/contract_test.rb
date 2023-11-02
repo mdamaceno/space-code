@@ -69,24 +69,31 @@ class ContractTest < ActiveSupport::TestCase
     assert_equal "Contract #{contract.id} paid: -₭#{contract.value}", transaction.description
   end
 
-  test "complete! raises an error if contract is already completed" do
+  test "complete! does not update if contract is already completed" do
     contract = contracts(:water_and_food_to_coruscant)
     contract.ship.pilot.update!(planet_id: planets(:coruscant).id)
     contract.complete!
+    contract.complete!
 
-    assert_raises(CustomErrors::ContractAlreadyCompletedError) { contract.complete! }
+    assert contract.completed_at.present?
+    assert_includes contract.errors.messages[:base], "Contract already completed"
   end
 
-  test "complete! raises an error if pilot is not in the destination planet" do
+  test "complete! does not update if pilot is not in the destination planet" do
     contract = contracts(:water_and_food_to_coruscant)
     contract.ship.pilot.update!(planet_id: planets(:naboo).id)
+    contract.complete!
 
-    assert_raises(CustomErrors::PilotNotInDestinationPlanetError) { contract.complete! }
+    assert contract.completed_at.nil?
+    assert_includes contract.errors.messages[:base], "Pilot not in destination planet"
   end
 
-  test "complete! raises an error if ship_id is not set" do
+  test "complete! does not update if ship_id is not set" do
     contract = contracts(:without_ship_id)
-    assert_raises(CustomErrors::ContractWithoutShipError) { contract.complete! }
+    contract.complete!
+
+    assert contract.completed_at.nil?
+    assert_includes contract.errors.messages[:base], "Ship not set"
   end
 
   test "payload should return resources" do
