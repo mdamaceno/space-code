@@ -55,7 +55,7 @@ class AddPilot extends BaseComponent {
         <br><br>
 
         <label for="pilot-age">Age</label>
-        <input type="number" id="pilot-age" name="pilot[age]" required>
+        <input type="number" id="pilot-age" name="pilot[age]" min="18" value="18" required>
         <br><br>
 
         <label for="pilot-ship-name">Ship Name</label>
@@ -63,15 +63,15 @@ class AddPilot extends BaseComponent {
         <br><br>
 
         <label for="pilot-ship-fuel_capacity">Fuel Capacity</label>
-        <input type="number" id="pilot-ship-fuel_capacity" name="pilot[ship][fuel_capacity]" required>
+        <input type="number" id="pilot-ship-fuel_capacity" name="pilot[ship][fuel_capacity]" min="0" value="0" required>
         <br><br>
 
         <label for="pilot-ship-fuel_level">Fuel Level</label>
-        <input type="number" id="pilot-ship-fuel_level" name="pilot[ship][fuel_level]" required>
+        <input type="number" id="pilot-ship-fuel_level" name="pilot[ship][fuel_level]" min="0" min="0" value="0" required>
         <br><br>
 
         <label for="pilot-ship-weight_capacity">Weight Capacity</label>
-        <input type="number" id="pilot-ship-weight_capacity" name="pilot[ship][weight_capacity]" required>
+        <input type="number" id="pilot-ship-weight_capacity" name="pilot[ship][weight_capacity]" min="0" value="0" required>
         <br><br>
 
         <button type="submit">Add Pilot</button>
