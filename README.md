@@ -38,6 +38,47 @@ The `docker-compose run --service-ports app` is also responsible to setup the da
 
 As an API, the interaction with the system is made hitting some endpoints. They are:
 
+### List planets
+#### Request
+`GET /planets`
+
+#### Response
+
+```
+HTTP/1.1 200 OK
+Status: 200 OK
+Content-Type: application/json
+
+{
+	"planets": [
+		{
+			"id": "bd664ba6-7791-11ee-8601-a8a1599ad2d2",
+			"name": "Andvari",
+			"created_at": "2023-10-31T02:05:58.321Z",
+			"updated_at": "2023-10-31T02:05:58.321Z"
+		},
+		{
+			"id": "d0107542-7791-11ee-862c-a8a1599ad2d2",
+			"name": "Aqua",
+			"created_at": "2023-10-31T02:05:58.333Z",
+			"updated_at": "2023-10-31T02:05:58.333Z"
+		},
+		{
+			"id": "d7430cc6-7791-11ee-a929-a8a1599ad2d2",
+			"name": "Calas",
+			"created_at": "2023-10-31T02:05:58.338Z",
+			"updated_at": "2023-10-31T02:05:58.338Z"
+		},
+		{
+			"id": "c94ff5f2-7791-11ee-b4ad-a8a1599ad2d2",
+			"name": "Demeter",
+			"created_at": "2023-10-31T02:05:58.328Z",
+			"updated_at": "2023-10-31T02:05:58.328Z"
+		}
+	]
+}
+```
+
 ### Create pilot
 #### Request
 `POST /pilots`
