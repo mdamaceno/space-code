@@ -22,10 +22,12 @@ class AddPilot extends BaseComponent {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ pilot })
-    }).then(response => {
+    }).then(this._checkStatus).then(response => {
       if (response.ok) {
+        this.errors = [];
         return response.json();
       }
+
       throw new Error('Network response was not ok.');
     }).then(data => {
       alert(`Pilot ${data.pilot.name} added with id ${data.pilot.id}`);
@@ -33,7 +35,11 @@ class AddPilot extends BaseComponent {
       form.reset();
       form.elements['pilot[name]'].focus();
     }).catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
+      console.error('There has been a problem with your fetch operation');
+      return error.json();
+    }).then(data => {
+      this.errors = data;
+      console.log(this.errors);
     });
   }
 
