@@ -27,4 +27,8 @@ class Contract < ApplicationRecord
       Transaction.send_credit(ship.pilot, value, "Contract #{id} paid: -₭#{value}", id)
     end
   end
+
+  def has_payload?
+    payload.present?
+  end
 end

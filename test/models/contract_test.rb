@@ -104,4 +104,10 @@ class ContractTest < ActiveSupport::TestCase
   test "scope incomplete should return contracts with completed_at nil" do
     assert Contract.incomplete.all? { |c| c.completed_at.nil? }
   end
+
+  test "has_payload? should return true if contract has resources" do
+    contract = contracts(:water_and_food_to_coruscant)
+    assert contract.has_payload?
+    assert_not Contract.new.has_payload?
+  end
 end
