@@ -1,10 +1,7 @@
-import {LitElement, html, until} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {html, until} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import BaseComponent from './base-component.js';
 
-class AddContract extends LitElement {
-  static properties = {
-    errors: { type: Array },
-  }
-
+class AddContract extends BaseComponent {
   _payloadInput(resource) {
     return html`
       <label for=${`contract-payload-${resource}`}>${resource} (weight)</label>
@@ -35,14 +32,6 @@ class AddContract extends LitElement {
         `)}
       </select>
     `;
-  }
-
-  _checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return Promise.resolve(response);
-    }
-
-    return Promise.reject(response);
   }
 
   submitForm(event) {
@@ -96,13 +85,7 @@ class AddContract extends LitElement {
     return html`
       <h2>Add Contract</h2>
 
-      ${this.errors ? html`
-        <ul>
-          ${Object.keys(this.errors).map(key => this.errors[key].map(error => html`
-            <li>${key} ${error}</li>
-          `))}
-        </ul>
-      ` : ''}
+      ${this._errorsTemplate(this.errors)}
 
       <form @submit=${this.submitForm}>
         <label for="contract-description">Description</label>

@@ -1,6 +1,7 @@
-import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
+import {html} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
+import BaseComponent from './base-component.js';
 
-class AddPilot extends LitElement {
+class AddPilot extends BaseComponent {
   submitForm(event) {
     event.preventDefault();
     const form = event.target;
@@ -39,6 +40,9 @@ class AddPilot extends LitElement {
   render() {
     return html`
       <h2>Add Pilot</h2>
+
+      ${this._errorsTemplate(this.errors)}
+
       <form @submit=${this.submitForm}>
         <label for="pilot-name">Name</label>
         <input type="text" id="pilot-name" name="pilot[name]" required>
